@@ -1,0 +1,7314 @@
+{
+	"routes": [
+		{
+			"sourceRoute": "/interface/v1/account/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": true,
+			"orchestrated": true,
+			"responseMessage": "Account Created Successfully",
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "user.created_at",
+							"targetField": "user.user_created_at"
+						},
+						{
+							"sourceField": "user.updated_at",
+							"targetField": "user.user_updated_at"
+						}
+					]
+				},
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "created_at",
+							"targetField": "profile_created_at"
+						},
+						{
+							"sourceField": "updated_at",
+							"targetField": "profile_updated_at"
+						}
+					]
+				}
+			]
+		},
+		{
+			"sourceRoute": "/interface/v1/account/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": true,
+			"orchestrated": true,
+			"responseMessage": "Profile Updated Successfully",
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "created_at",
+							"targetField": "user_created_at"
+						},
+						{
+							"sourceField": "updated_at",
+							"targetField": "user_updated_at"
+						},
+						{
+							"sourceField": "meta",
+							"targetField": "user_meta"
+						},
+						{
+							"sourceField": "deleted_at",
+							"targetField": "user_deleted_at"
+						}
+					]
+				},
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "created_at",
+							"targetField": "profile_created_at"
+						},
+						{
+							"sourceField": "updated_at",
+							"targetField": "profile_updated_at"
+						},
+						{
+							"sourceField": "meta",
+							"targetField": "profile_meta"
+						},
+						{
+							"sourceField": "deleted_at",
+							"targetField": "profile_deleted_at"
+						}
+					]
+				}
+			]
+		},
+		{
+			"sourceRoute": "/interface/v1/entity-type/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": true,
+			"responseMessage": "Entity type fetched successfully",
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "entity_types",
+							"targetField": "entity_types[]"
+						}
+					]
+				},
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "entity_types",
+							"targetField": "entity_types[]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"sourceRoute": "/interface/v1/account/login",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": true,
+			"orchestrated": true,
+			"responseMessage": "User logged in successfully.",
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user",
+					"targetBody": [],
+					"responseBody": []
+				},
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring",
+					"targetBody": [],
+					"responseBody": [
+						{
+							"sourceField": "permissions",
+							"targetField": "user.permissions[]"
+						}
+					]
+				}
+			],
+			"rateLimit": {
+				"type": "public-low"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/account/login",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/role-permission-mapping/list",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/permissions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/permissions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/permissions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/permissions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/permissions/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/permissions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/permissions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/permissions/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/modules/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/modules/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/modules/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/modules/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/role-permission-mapping/create/:role_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/role-permission-mapping/delete/:role_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/role-permission-mapping/list",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/acceptTermsAndCondition",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/resetPassword",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/generateToken",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/generateOtp",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "public-low"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/account/logout",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/account/registrationOtp",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "public-low"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/user/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/user/read/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/user/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/user/share",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/user/share/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/user-role/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/user-role/default",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/user-role/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/user-role/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/user-role/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/form/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/form/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/form/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/form/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/form/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/cloud-services/file/getSignedUrl",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/cloud-services/file/getDownloadableUrl",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/cloud-services/getSignedUrl",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/cloud-services/getDownloadableUrl",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/admin/deleteUser",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/admin/deleteUser/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/admin/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/admin/login",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/entity-type/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity-type/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity-type/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity-type/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity-type/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity-type/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/entity/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/update",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/update/:id",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/form/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/form/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/form/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/form/update",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/form/update/:id",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity-type/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity-type/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity-type/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity-type/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity-type/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/entity-type/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/details",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/share",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/share/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/enroll",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/enroll/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/unEnroll",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/unEnroll/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/start",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/start/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/update/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/feedback",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/feedback/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/updateRecordingUrl",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/updateRecordingUrl/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/completed",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/completed/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/completed",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/completed/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/getRecording",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/getRecording/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/sessions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/joinSession",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/joinSession/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/homeFeed",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/reports",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/profile",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/update",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/getMenteeExtension/",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/deleteMenteeExtension",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/reports",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/profile",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/profile/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/upcomingSessions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/upcomingSessions/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/share",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/share/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/update",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/getMentorExtension",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/deleteMentorExtension",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/feedback/submit",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/feedback/submit/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/feedback/forms",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/feedback/forms/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/questions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/questions/update",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/questions/update/:id",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/questions/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/questions/read/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/question-set/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/question-set/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/question-set/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/question-set/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/question-set/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/users/pendingFeedbacks",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/users/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/issues/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/platform/config",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/admin/userDelete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/inheritEntityType",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/roleChange",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/setOrgPolicies",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/getOrgPolicies",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/deactivateUpcomingSession",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/organization/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/organization/eventListener",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/admin/triggerPeriodicViewRefresh",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/admin/triggerViewRebuild",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/admin/triggerPeriodicViewRefreshInternal",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/admin/triggerViewRebuildInternal",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/createdSessions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/details",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentors/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/inheritEntityType",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/admin/addOrgAdmin",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/addOrgAdmin",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/bulkUserCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/getBulkInvitesFilesList",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/getRequestDetails/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/deactivateUser",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/getRequests",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/updateRequestStatus",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/requestOrgRole",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/admin/deactivateOrg/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/read/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scheduler/jobs/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "scheduler",
+					"packageName": "elevate-scheduler"
+				}
+			],
+			"rateLimit": {
+				"type": "none"
+			}
+		},
+		{
+			"sourceRoute": "/scheduler/jobs/updateDelay",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "scheduler",
+					"packageName": "elevate-scheduler"
+				}
+			],
+			"rateLimit": {
+				"type": "none"
+			}
+		},
+		{
+			"sourceRoute": "/scheduler/jobs/remove",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "scheduler",
+					"packageName": "elevate-scheduler"
+				}
+			],
+			"rateLimit": {
+				"type": "none"
+			}
+		},
+		{
+			"sourceRoute": "/scheduler/jobs/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "scheduler",
+					"packageName": "elevate-scheduler"
+				}
+			],
+			"rateLimit": {
+				"type": "none"
+			}
+		},
+		{
+			"sourceRoute": "/scheduler/jobs/purge",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "scheduler",
+					"packageName": "elevate-scheduler"
+				}
+			],
+			"rateLimit": {
+				"type": "none"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/profile/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/profile/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/profile/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/cloud-services/file/getSampleCSV",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/template",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/template/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/notification/template",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/notification/template",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/notification/template/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/notification/template",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/updateRelatedOrgs",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/updateOrganization",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/manage-sessions/createdSessions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/manage-sessions/downloadSessions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/search",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/mentoring/v1/mentees/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/profile/filterList",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/enrolledMentees/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/enrolledMentees",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/permissions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/permissions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/permissions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/permissions/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/modules/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/modules/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/modules/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/modules/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/role-permission-mapping/create/:role_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/role-permission-mapping/delete/:role_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/addMentees",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/addMentees/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/removeMentees",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/removeMentees/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/sessions/bulkUpdateMentorNames",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/user/v1/organization/addRelatedOrg/:org_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/organization/removeRelatedOrg/:org_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/changePassword",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/sessions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/validateUserSession",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/searchByEmailIds",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/org-admin/bulkSessionCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/read/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/isAvailable",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/isAvailable/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/mentoring/v1/availability/users",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "mentoring",
+					"packageName": "elevate-mentoring"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/permissions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/details",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/details/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/certificates",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/configurations/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/verifyCertificate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/verifyCertificate/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/certificateReIssue",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/certificateCallback",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/certificateCallbackError",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/certificateReIssue/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateBaseTemplates/createOrUpdate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateBaseTemplates/createOrUpdate/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateTemplates/createOrUpdate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateTemplates/createOrUpdate/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateTemplates/uploadTemplate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateTemplates/uploadTemplate/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/certificateTemplates/createSvg",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/sync",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/sync/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/tasksStatus",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/tasksStatus/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/add",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/userAssigned",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/share",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/share/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/importedProjects",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/importedProjects/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/list",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/cloud-services/files/download",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/cloud-services/files/preSignedUrls",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/cloud-services/files/getDownloadableUrl",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/dataPipeline/userProject",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/dataPipeline/userProject/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/bulkCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/bulkUpdate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/importProjectTemplate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/importProjectTemplate/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/listByIds",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/details",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templates/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templateTasks/bulkCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templateTasks/bulkCreate/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templateTasks/bulkUpdate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templateTasks/bulkUpdate/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templateTasks/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/project/templateTasks/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/library/categories/projects",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/library/categories/projects/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/library/categories/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/library/categories/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/library/categories/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/library/categories/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/bulkCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/bulkUpdate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/find",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entityTypes/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/bulkCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/targetedRoles/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/entityListBasedOnEntityType",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/bulkUpdate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/add",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/list/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/find",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/details",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/listByEntityType",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/listByEntityType/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/subEntityList",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/subEntityList/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/listByIds",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/subEntityListBasedOnRoleAndLocation",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/subEntityListBasedOnRoleAndLocation/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/relatedEntities",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/relatedEntities/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/userRoleExtension/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/userRoleExtension/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/userRoleExtension/find",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/userRoleExtension/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/mappingUpload",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-interface/v2/account/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-interface/v2/account/login",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+
+		{
+			"sourceRoute": "/elevate-interface/v2/account/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v2/account/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/login",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/user/v1/account/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/config/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/details",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/addRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/addRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/removeRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/removeRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/addEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/addEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/removeEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/removeEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/join",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/programs/join/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/admin/createIndex/solutions",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/admin/createIndex/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/polls/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/polls/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/polls/getPollQuestions/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/pollSubmissions/make/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/files/preSignedUrls",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/files/getDownloadableUrl",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/details",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/details/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/verifyLink",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/verifyLink/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/fetchLink",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/fetchLink/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/getDetails",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/getDetails/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/isTargetedBasedOnUserProfile",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/isTargetedBasedOnUserProfile/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/detailsBasedOnRoleAndLocation",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/detailsBasedOnRoleAndLocation/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/forUserRoleAndLocation",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/addEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/addEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/addRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/addRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/removeEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+        {
+			"sourceRoute": "/samiksha/v1/solutions/removeEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/removeRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/removeRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/solutions/targetedSolutions",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/addEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/addEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/addRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/addRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/removeEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+        {
+			"sourceRoute": "/samiksha/v1/programs/removeEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/removeRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/removeRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/join",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/join/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/details",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/programs/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveys/importSurveryTemplateToSolution/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},	
+		{
+			"sourceRoute": "/samiksha/v1/surveys/importSurveryTemplateToSolution",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},	
+		{
+			"sourceRoute": "/samiksha/v1/surveys/getLink/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},	
+		{
+			"sourceRoute": "/samiksha/v1/surveys/getLink/",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},	
+		{
+			"sourceRoute": "/samiksha/v1/surveys/createSolutionTemplate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},	
+		{
+			"sourceRoute": "/samiksha/v1/surveys/mapSurverySolutionToProgram/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},	
+		{
+			"sourceRoute": "/samiksha/v1/surveys/mapSurverySolutionToProgram",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveys/userAssigned",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveys/details/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveys/details/",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/getStatus/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/getStatus",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/list",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/isAllowed/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/surveySubmissions/isAllowed",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/samiksha/v1/questions/bulkCreate",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "samiksha",
+					"packageName": "elevate-survey"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/list",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/forUserRoleAndLocation",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/detailsBasedOnRoleAndLocation",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/detailsBasedOnRoleAndLocation/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/addRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/addRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/addEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/addEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/removeRolesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/removeRolesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/targetedSolutions",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/fetchLink",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/fetchLink/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/verifyLink",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/verifyLink/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/verifySolution",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/verifySolution/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/getDetails",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/getDetails/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/removeEntitiesInScope",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/removeEntitiesInScope/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/importFromLibrary",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/userProjects/importFromLibrary/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/entity-management/v1/entities/listByLocationIds",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "entity_management",
+					"packageName": "elevate-entity-management"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/forms/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/forms/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/forms/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/forms/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/forms/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/user/v1/org-admin/updateUser/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/form/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/form/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/form/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/form/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/form/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/entity-types/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entity-types/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entity-types/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entity-types/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entity-types/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entity-types/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/read/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/update",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/update/:id",
+			"type": "PUT",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/delete",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/entities/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/admin/dbFind",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/admin/dbFind/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/reports/entity",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/reports/getProgramsByEntity/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/reports/entity/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/reports/detailView",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/project/v1/reports/detailView/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/generateOtp",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "public-low"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/resetPassword",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/acceptTermsAndCondition",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/logout",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/details/",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/details/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/cloud-services/file/fetchJsonFromCloud",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/reviewerList",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/registrationOtp",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "public-low"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/search",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "public-low"
+			}
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/update/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages":[
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+			
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/deleteUser",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/deleteUser/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/login",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/organization/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/scp/v1/permissions/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/permissions/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/permissions/getPermissions",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/permissions/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/permissions/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/modules/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/modules/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/modules/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/modules/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/certificate/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/resource/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/resource/upForReview",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/organization/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user-role/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user-role/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user-role/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user-role/delete/:id",
+			"type": "DELETE",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/org-admin/updateUser/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/admin/createIndex",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/admin/createIndex/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/details",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/profile/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/project/v1/solutions/details/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "project",
+					"packageName": "elevate-project"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/entity-type/create",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/entity-type/update",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/entity-type/update/:id",
+			"type": "PATCH",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/entity-type/read",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user/read",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/user/read/:id",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/triggerPeriodicViewRefresh",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/triggerViewRebuild",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/triggerPeriodicViewRefreshInternal",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/admin/triggerViewRebuildInternal",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			],
+			"rateLimit": {
+				"type": "internal"
+			}
+		},
+		{
+			"sourceRoute": "/scp/v1/role-permission-mapping/create/:role_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/role-permission-mapping/delete/:role_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/role-permission-mapping/list",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/submitForReview/:resource_id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/projects/submitForReview/",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/cloud-services/file/getSignedUrl",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/cloud-services/file/getDownloadableUrl",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/elevate-user/v1/account/validateUserSession",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "user",
+					"packageName": "elevate-user"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/comments/list",
+			"type": "GET",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/comments/update",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/comments/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/reviews/update/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/reviews/start/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/reviews/approve/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		},
+		{
+			"sourceRoute": "/scp/v1/reviews/rejectOrReport/:id",
+			"type": "POST",
+			"priority": "MUST_HAVE",
+			"inSequence": false,
+			"orchestrated": false,
+			"targetPackages": [
+				{
+					"basePackageName": "self_creation_portal",
+					"packageName": "elevate-self-creation-portal"
+				}
+			]
+		}
+	],
+	"requiredEnvs": {
+		"USER_SERVICE_BASE_URL": {
+			"message": "Required user service base URL",
+			"optional": false
+		},
+		"MENTORING_SERVICE_BASE_URL": {
+			"message": "Required mentoring service base URL",
+			"optional": false
+		},
+		"SELF_CREATION_PORTAL_SERVICE_BASE_URL": {
+			"message": "Required Creation portal service base URL",
+			"optional": false
+		},
+		"PROJECT_SERVICE_BASE_URL": {
+			"message": "Required project service base URL",
+			"optional": false
+		},
+		"ENTITY_MANAGEMENT_SERVICE_BASE_URL": {
+			"message": "Required entity service base URL",
+			"optional": false
+		},
+		"SAMIKSHA_SERVICE_BASE_URL": {
+			"message": "Required survey service base URL",
+			"optional": false
+		}
+	},
+	"services": {
+		"elevate-scheduler": "^1.0.4",
+		"elevate-project": "^1.0.1",
+		"elevate-entity-management": "^1.0.1",
+		"elevate-survey": "1.0.0"
+	}
+}

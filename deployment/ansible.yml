@@ -8,7 +8,7 @@
         src: "{{ project_path }}/.token"
       register: slurpfile
     - name: Run vault credentials
-      shell: "curl --location --request GET '{{ vaultAddress }}interface' --header 'X-Vault-Token: {{ slurpfile['content'] | b64decode }}' | jq '.data' > '{{ project_path 
+      shell: "curl --location --request GET '{{ vaultAddress }}elevate-project-interface' --header 'X-Vault-Token: {{ slurpfile['content'] | b64decode }}' | jq '.data' > '{{ project_path 
 }}/data2.json'"
       register: credentials
 
@@ -19,10 +19,10 @@
     - name: Create release folder
       set_fact:
         release_path: "{{ project_path }}/releases/{{ lookup('pipe','date +%Y%m%d%H%M%S') }}"
-        current_path: "{{ project_path }}/interface"
+        current_path: "{{ project_path }}/elevate-project-interface"
     
     - name: Retrieve current release folder
-      command: readlink -f interface
+      command: readlink -f elevate-project-interface
       register: current_release_path
       ignore_errors: yes
       args:
@@ -44,13 +44,13 @@
       shell: cd {{release_path}}/src && npm i && npm i redoc-cli 
 
     - name: Delete Old Folder & create folder
-      shell: rm -rf {{ current_path }} &&  cd {{ project_path }} && mkdir interface
+      shell: rm -rf {{ current_path }} &&  cd {{ project_path }} && mkdir elevate-project-interface
 
     - name: Move code from release  to service folder
       shell: mv "{{ release_path }}"/* {{ current_path }}/
 
     - name: Delete old pm2 process
-      command: pm2 delete elevate-interface
+      command: pm2 delete elevate-project-interface
       ignore_errors: yes
     
     - name: set permission
@@ -73,7 +73,7 @@
       shell: rm -rf  {{ release_path }}
 
     - name: Start pm2
-      command: "chdir={{current_path}}/src pm2 start app.js -i 2 --name elevate-interface"
+      command: "chdir={{current_path}}/src pm2 start app.js -i 2 --name elevate-project-interface"
       register: pm2Info
 
     - name: debug info
